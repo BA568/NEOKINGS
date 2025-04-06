@@ -4,16 +4,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NeoKings | Royal NFT Kingdom</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>NeoKings | Kingdom of Digital Royalty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&family=Caesar+Dressing&display=swap" rel="stylesheet">
   <script src="js/three.min.js"></script>
   <script src="js/gsap.min.js"></script>
   <style>
     body, html {
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
       background: #0a0a0a;
+      font-family: 'Inter', sans-serif;
       color: #FFD700;
       overflow-x: hidden;
     }
@@ -28,22 +28,19 @@
     header {
       text-align: center;
       padding: 4rem 2rem;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(5px);
+      background: linear-gradient(to bottom, #111 60%, #000);
     }
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 3.5rem;
-      margin: 0;
     }
     header p {
       font-size: 1.2rem;
       color: #ccc;
-      margin-top: 1rem;
     }
     .cta {
       display: inline-block;
-      margin-top: 2rem;
+      margin-top: 1rem;
       padding: 1rem 2rem;
       background: #FFD700;
       color: #111;
@@ -51,19 +48,23 @@
       font-weight: bold;
       text-decoration: none;
     }
+    .countdown {
+      font-size: 1.8rem;
+      margin-top: 1rem;
+      color: #FFD700;
+    }
     .section {
       padding: 6rem 2rem;
       text-align: center;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
-    .section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #FFD700;
-    }
-    .section p {
-      max-width: 700px;
-      margin: 0 auto;
-      color: #ccc;
+    .throne-room { background-image: url('gallery/throne-bg.gif'); }
+    .gallery-section { background-image: url('gallery/glass-pedestal-bg.gif'); }
+    .lore-section {
+      background-image: url('gallery/ancient-scrolls.gif');
+      font-family: 'Caesar Dressing', cursive;
     }
     .gallery {
       display: flex;
@@ -79,10 +80,9 @@
       scroll-snap-align: center;
     }
     .footer {
-      background-color: #111;
+      background: #111;
       padding: 2rem;
       text-align: center;
-      font-size: 0.9rem;
       color: #888;
     }
   </style>
@@ -92,61 +92,98 @@
 
   <header>
     <h1>NeoKings</h1>
-    <p>Cartoon meets royalty. 3D meets eternity. Enter the kingdom of digital rulers.</p>
+    <p>Enter the Kingdom of Digital Royalty</p>
+    <div class="countdown" id="countdown"></div>
+    <a href="gallery_intro.html" class="cta">Enter Gallery</a>
     <a href="#mint" class="cta">Mint Your Throne</a>
   </header>
 
-  <section class="section">
+  <section class="section throne-room">
     <h2>The Throne Room</h2>
-    <p>
-      A kingdom ruled by code, style, and legacy. 1000 digital busts, each crowned with generative precision.
-    </p>
+    <p>1000 generative kings, each crowned with purpose, floating between worlds. Welcome to the Throne Room.</p>
   </section>
 
-  <section class="section">
+  <section class="section gallery-section">
     <h2>Gallery of Kings</h2>
     <div class="gallery">
-      <img src="gallery/neoking1.jpg" alt="Neoking 1" />
-      <img src="gallery/neoking2.jpg" alt="Neoking 2" />
-      <img src="gallery/neoking3.jpg" alt="Neoking 3" />
-      <img src="gallery/neoking4.jpg" alt="Neoking 4" />
+      <img src="gallery/neoking1.jpg" />
+      <img src="gallery/neoking2.jpg" />
+      <img src="gallery/neoking3.jpg" />
+      <img src="gallery/neoking4.jpg" />
     </div>
   </section>
 
-  <section class="section">
+  <section class="section lore-section">
     <h2>Lore of the Kingdom</h2>
-    <p>
-      Long ago, in the ashes of broken dynasties, new kings emerged—molded from code, art, and rebellion.
-    </p>
+    <p>From shattered empires rose new gods — sculpted from code, crowned by AI. This is the tale of the NeoKings.</p>
   </section>
 
   <footer class="footer">
-    &copy; 2025 Neokings. Crafted for digital royalty.
+    &copy; 2025 Neokings. Forged in the fires of digital legacy.
   </footer>
 
   <script>
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg'), alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    const geometry = new THREE.SphereGeometry(5, 64, 64);
-    const material = new THREE.MeshStandardMaterial({ color: 0xFFD700, metalness: 0.8, roughness: 0.3 });
-    const sphere = new THREE.Mesh(geometry, material);
-    scene.add(sphere);
+    const light1 = new THREE.PointLight(0xffffff, 1.2);
+    light1.position.set(10, 10, 10);
+    scene.add(light1);
 
-    const light = new THREE.PointLight(0xffffff, 1);
-    light.position.set(10, 10, 10);
-    scene.add(light);
+    const light2 = new THREE.PointLight(0xffd700, 1);
+    light2.position.set(-10, -10, 5);
+    scene.add(light2);
 
-    camera.position.z = 15;
+    const bustGeometry = new THREE.CylinderGeometry(2, 3, 6, 32, 1, true);
+    const glassMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xccccff,
+      metalness: 0.3,
+      roughness: 0,
+      transparent: true,
+      opacity: 0.4,
+      transmission: 1.0,
+      clearcoat: 1,
+      reflectivity: 1
+    });
+    const bust = new THREE.Mesh(bustGeometry, glassMaterial);
+    scene.add(bust);
+
+    const crownGeometry = new THREE.TorusGeometry(1.5, 0.2, 8, 30);
+    const crownMaterial = new THREE.MeshStandardMaterial({ color: 0xffd700, emissive: 0xffd700, emissiveIntensity: 0.5 });
+    const crown = new THREE.Mesh(crownGeometry, crownMaterial);
+    crown.position.y = 3.5;
+    crown.rotation.x = Math.PI / 2;
+    scene.add(crown);
+
+    camera.position.z = 12;
 
     function animate() {
       requestAnimationFrame(animate);
-      sphere.rotation.y += 0.003;
+      bust.rotation.y += 0.003;
+      crown.rotation.y += 0.005;
+      bust.position.y = Math.sin(Date.now() * 0.001) * 0.2;
+      crown.position.y = 3.5 + Math.sin(Date.now() * 0.001) * 0.1;
       renderer.render(scene, camera);
     }
     animate();
+
+    const mintDate = new Date();
+    mintDate.setDate(mintDate.getDate() + 60);
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = mintDate - now;
+      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById('countdown').innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById('countdown').innerHTML = "Mint is Live!";
+      }
+    }, 1000);
   </script>
 </body>
 </html>
